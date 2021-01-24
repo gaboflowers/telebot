@@ -49,8 +49,9 @@ telebot_error_e telebot_parser_get_updates(struct json_object *obj, telebot_upda
         return TELEBOT_ERROR_INVALID_PARAMETER;
 
     struct json_object *array = obj;
-    int array_len = json_object_array_length(array);
-    if (!array_len)
+    int array_len = -1;
+    array_len = json_object_array_length(array);
+    if (array_len == -1)
         return TELEBOT_ERROR_OPERATION_FAILED;
 
     telebot_update_t *result = calloc(array_len, sizeof(telebot_update_t));
